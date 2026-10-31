@@ -21,6 +21,11 @@
 
     <form class="compose" id="compose" autocomplete="off">
       <input class="compose__input" id="task-input" type="text" placeholder="今天要做什么？" aria-label="新任务" maxlength="200">
+      <div class="compose__priority" id="priority-select" role="radiogroup" aria-label="优先级">
+        <button type="button" data-priority="high" role="radio" aria-checked="false">高</button>
+        <button type="button" data-priority="medium" role="radio" aria-checked="true">中</button>
+        <button type="button" data-priority="low" role="radio" aria-checked="false">低</button>
+      </div>
       <button class="compose__add" type="submit">添加</button>
     </form>
 

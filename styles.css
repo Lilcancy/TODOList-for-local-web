@@ -9,6 +9,12 @@
   --accent-ink: #155f54;
   --accent-soft: #e4f0ec;
   --danger: #b4504a;
+  --prio-high: #b4504a;
+  --prio-high-soft: #f8e6e4;
+  --prio-medium: #a56a1a;
+  --prio-medium-soft: #f6ecd9;
+  --prio-low: #5c6b78;
+  --prio-low-soft: #e8ecef;
 }
 
 html[data-theme="dark"] {
@@ -22,6 +28,12 @@ html[data-theme="dark"] {
   --accent-ink: #6bd4be;
   --accent-soft: #1b3731;
   --danger: #d07a72;
+  --prio-high: #e3908a;
+  --prio-high-soft: #3a2625;
+  --prio-medium: #d9a35b;
+  --prio-medium-soft: #3a3020;
+  --prio-low: #9aaab6;
+  --prio-low-soft: #26333e;
 }
 
 * {
@@ -129,6 +141,37 @@ html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.compose__priority {
+  flex: none;
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+.compose__priority button {
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 7px;
+  padding: 8px 10px;
+  color: var(--ink-2);
+  background: transparent;
+  transition: color 0.15s, background 0.15s;
+}
+
+.compose__priority button:hover {
+  color: var(--ink);
+}
+
+.compose__priority button.is-active {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
 }
 
 .compose__add {
@@ -243,6 +286,41 @@ html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
+}
+
+.task__priority {
+  flex: none;
+  font: inherit;
+  font-size: 0.72rem;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 4px 8px;
+  transition: opacity 0.15s;
+}
+
+.task__priority:hover {
+  opacity: 0.8;
+}
+
+.task__priority--high {
+  color: var(--prio-high);
+  background: var(--prio-high-soft);
+}
+
+.task__priority--medium {
+  color: var(--prio-medium);
+  background: var(--prio-medium-soft);
+}
+
+.task__priority--low {
+  color: var(--prio-low);
+  background: var(--prio-low-soft);
+}
+
+.task--done .task__priority {
+  opacity: 0.55;
 }
 
 .task__text {

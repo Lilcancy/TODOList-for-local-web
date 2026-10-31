@@ -9,6 +9,7 @@ const els = {
   clock: document.getElementById('clock'),
   form: document.getElementById('compose'),
   input: document.getElementById('task-input'),
+  priority: document.getElementById('priority-select'),
   list: document.getElementById('tasks'),
   count: document.getElementById('count'),
   clearDone: document.getElementById('clear-done'),
@@ -18,6 +19,7 @@ const els = {
 
 let tasks = store.load();
 let filter = 'all';
+let priority = 'medium';
 
 function render() {
   renderer.render(tasks, filter, els);
@@ -41,12 +43,24 @@ els.themeToggle.addEventListener('click', () => {
   localStorage.setItem('theme', next);
 });
 
+// —— 优先级选择 ——
+els.priority.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-priority]');
+  if (!btn) return;
+  priority = btn.dataset.priority;
+  els.priority.querySelectorAll('[data-priority]').forEach((b) => {
+    const active = b === btn;
+    b.classList.toggle('is-active', active);
+    b.setAttribute('aria-checked', String(active));
+  });
+});
+
 // —— 新增任务 ——
 els.form.addEventListener('submit', (e) => {
   e.preventDefault();
   const text = els.input.value.trim();
   if (!text) return;
-  store.addTask(tasks, text);
+  store.addTask(tasks, text, priority);
   els.input.value = '';
   render();
   els.input.focus();
@@ -79,6 +93,7 @@ els.list.addEventListener('click', (e) => {
   if (!action) return;
   if (action.dataset.action === 'toggle') store.toggleTask(tasks, li.dataset.id);
   else if (action.dataset.action === 'delete') store.removeTask(tasks, li.dataset.id);
+  else if (action.dataset.action === 'priority') store.cyclePriority(tasks, li.dataset.id);
   render();
 });
 
